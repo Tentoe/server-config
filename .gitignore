@@ -38,3 +38,4 @@ clouds.yml
 
 # kolla-ansible
 passwords.yml
+admin-openrc.sh
