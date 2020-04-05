@@ -1,0 +1,24 @@
+{
+    "builders": [
+        {
+            "type": "openstack",
+            "cloud": "openstack",
+            "image_name": "Ubuntu Bionic Docker",
+            "source_image_name": "Ubuntu Bionic",
+            "networks": [
+                "0bfb200f-b55a-495d-ba65-6339bc21b7b8"
+            ],
+            "security_groups": [
+                "packer"
+            ],
+            "ssh_username": "ubuntu",
+            "flavor": "micro"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "ansible",
+            "playbook_file": "./install_docker_ubuntu.ansible"
+        }
+    ]
+}
