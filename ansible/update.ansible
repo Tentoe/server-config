@@ -1,0 +1,9 @@
+---
+- name: test
+  hosts: kirk
+  remote_user: kkurz
+
+  tasks:
+    - name: install 
+      apt: python3-pip, needrestart
+

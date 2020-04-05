@@ -1,0 +1,10 @@
+---
+- name: test ansible
+  hosts: localhost
+  tasks:
+    - name: Check if ansible user can do passwordless sudo
+      command: "true"
+      become: yes
+      register: result
+      failed_when: result is failed
+      changed_when: False

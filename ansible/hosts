@@ -1,0 +1,8 @@
+
+[openstack]
+julia
+localhost       ansible_connection=local 
+
+[openstack:vars]
+ansible_user=openstack
+
