@@ -7,5 +7,5 @@ data "openstack_identity_project_v3" "project" {
 }
 module "networks" {
   source        = "./modules/networks"
-  network_names = ["default", "ceph"]
+  network_names = ["default", "ceph", "kube"]
 }
