@@ -1,8 +1,8 @@
 
 variable "project_name" {
-    default = "test"
+    default = "main"
 }
 
-variable "public_key" {
-  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDLNnFW6ivs6nYQKkLD18AUBm1JJ36zbZjUhXTT2Tlw5OdVhnvISfzMkX9YN0RIMfvkPWtcXzIo9tYqettdpbV0u64lZq23+aOFvTwIPhdw3pCbLdMXZo/Zqn7dpqtwc+uRStnx7Oy6SvPvlU5TqgsV5TDEbkbwECIsMJBeQ8QH1oOHMdEmaTF3UEhF1qr8r4ldxLouscsL1S49j3xx0KmRbwQZUjdlIpxLox92dHustEThxrM5IC6LLC6xlo6kZu18QiYQQ97kvh6aDTPZTa+E3WU5Ggl2bUn4RWq4DURjQ3yV0SMotUJcdOpJjD7Y0n/hzwq2OHwlglLjKj3oAMI5neb4fxxLlECOwibo/ar23MnF0YdxVWhstZwpYtuDJZmZTizRAFJSRM/XtWgqfq+oBr0fz06w3LQz6cxnnon6yrp0uLRqMO6pRsELIanaGy62qhJawTAZdH6mS1Esp4Z89EoSDvWp/UbjEmFxfvxD0hFEBuCeacdvSnxTu1flnPwqjpBB9bXe4R9t+Gl3aBYlztbQnJkGvCb9cc4Hn+3zCkCe0rhgJzABVunucxc/n8l0z91JDyIrPZh7bGCnl9KUlYyIpfkoas4uIyXGnUs5yfLPZ87kNiK2wFhaprkdnvhyW31fx8rwVbhkgp3TC40CBeyN+8uOtx7iOoQG7wg72Q== keven.kurz@gmail.com"
+variable "password" {
+    default = "pass"
 }

@@ -7,6 +7,7 @@ resource "openstack_networking_network_v2" "net" {
 
 resource "openstack_networking_subnet_v2" "subnet" {
   for_each      = toset(var.network_names)
+  name          = each.value
   prefix_length = 24
   network_id    = openstack_networking_network_v2.net[each.value].id
   subnetpool_id = openstack_networking_subnetpool_v2.pool.id

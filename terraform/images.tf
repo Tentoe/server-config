@@ -1,8 +1,4 @@
 
-data "openstack_images_image_v2" "ubuntu_bionic_docker" {
-  name="Ubuntu Bionic Docker"
-  most_recent = true
-}
 
 resource "openstack_images_image_v2" "ubuntu_bionic" {
   name             = "Ubuntu Bionic"
@@ -11,5 +7,8 @@ resource "openstack_images_image_v2" "ubuntu_bionic" {
   disk_format      = "qcow2"
 
   min_disk_gb = 3
-  min_ram_mb = 512
+  min_ram_mb  = 512
 }
+
+
+

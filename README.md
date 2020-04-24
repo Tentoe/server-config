@@ -2,10 +2,6 @@
 
 ## Ceph
 
-### 500 Error in Dashboard with selfsinged cert
-
-`ceph dashboard set-grafana-api-ssl-verify False`
-
 ### Ceph auth for manila
 
 ```bash
@@ -17,11 +13,15 @@ allow command "auth get",
 allow command "auth get-or-create"
 EOF
 
-ceph auth get-or-create client.manila -o manila.keyring \
+ceph auth get-or-create client.manila -o ceph.client.manila.keyring \
 mds 'allow *' \
 osd 'allow rw' \
 mon "$MON_CAPS"
 ```
+
+### Ceph auth for glance
+
+- `ceph auth get-or-create client.glance mon 'profile rbd' osd 'profile rbd pool=images' mgr 'profile rbd pool=images' -o ceph.client.glance.keyring`
 
 ### Manila share type
 
@@ -79,12 +79,11 @@ kubeadm join 10.10.2.58:6443 --token tmix1q.v2nl4rjy0ejl09bl \
     --discovery-token-ca-cert-hash sha256:b3f0eddfad4410c437f1a572c759903fb33bfa2c105c543b051b02ef64dd06cb
 ```
 
-### sono
+### Keystone
 
-```bash
-VERSION=0.16.1 OS=linux && \
-    curl -L "https://github.com/vmware-tanzu/sonobuoy/releases/download/v${VERSION}/sonobuoy_${VERSION}_${OS}_amd64.tar.gz" --output $HOME/bin/sonobuoy.tar.gz && \
-    tar -xzf $HOME/bin/sonobuoy.tar.gz -C $HOME/bin && \
-    chmod +x $HOME/bin/sonobuoy && \
-    rm $HOME/bin/sonobuoy.tar.gz
+
 ```
+- `openstack group create federated_users`
+- `openstack project create federated_project`
+- `openstack role add --group federated_users --project federated_project member`
+- `openstack federation protocol create saml2 --mapping samltest_mapping --identity-provider samltest`

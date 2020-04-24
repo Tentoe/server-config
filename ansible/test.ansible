@@ -1,6 +1,6 @@
 ---
 - name: test ansible
-  hosts: localhost
+  hosts: all
   tasks:
     - name: Check if ansible user can do passwordless sudo
       command: "true"

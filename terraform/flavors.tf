@@ -15,6 +15,7 @@ resource "openstack_compute_flavor_v2" "micro" {
   vcpus = "1"
   disk  = "10"
 }
+
 resource "openstack_compute_flavor_access_v2" "access_micro" {
   tenant_id = data.openstack_identity_project_v3.project.id
   flavor_id = openstack_compute_flavor_v2.micro.id
