@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  haproxy:
+    image: haproxy:2.1
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    restart: unless-stopped

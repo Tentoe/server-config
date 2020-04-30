@@ -1,0 +1,48 @@
+- hosts: 
+  - kube_master
+  - kube_worker
+  become: yes
+
+  roles:
+  - role: docker
+    tags: ['never', 'install']
+  - role: kubeadm
+    tags: ['never', 'install']
+
+- hosts: kube_master
+  become: yes
+
+  roles:
+  - role: kubeinit
+    tags: ['never', 'init']
+
+- hosts: "{{ groups['kube_master'][0] }}" 
+  become: yes
+  tags: ['never', 'init']
+  tasks:
+
+  - name: Create new token
+    shell: kubeadm token create --print-join-command
+    register: temp_token
+
+  - name: Set kubeadm_join_cmd
+    set_fact:
+      kubeadm_join_cmd: "{{ temp_token.stdout }}"
+  
+- hosts: kube_worker
+  become: yes
+  tags: ['never', 'init']
+  tasks:
+  - name: join cluster
+    shell: |
+      {{ hostvars[groups['kube_master'][0]].kubeadm_join_cmd }} \
+      >> /var/log/kubadm-join.log
+
+
+- hosts: 
+  - kube_master
+  - kube_worker
+  become: yes
+
+  roles:
+  - role: ceph-common

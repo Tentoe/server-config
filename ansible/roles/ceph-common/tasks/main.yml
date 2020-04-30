@@ -1,0 +1,34 @@
+
+- name: Update all packages to the latest version
+  apt:
+    upgrade: dist
+    cache_valid_time: 3600
+
+- name: modprobe rbd
+  block:
+
+  - name: Add the rbd module
+    modprobe:
+      name: rbd
+
+  - name: Making rbd persist through reboot
+    lineinfile:
+      path: /etc/modules
+      line: rbd
+      create: yes
+
+- name: Add Ceph GPG apt Key
+  apt_key:
+    url: https://download.ceph.com/keys/release.asc
+
+- name: Add Ceph Repository
+  apt_repository:
+    repo: "deb https://download.ceph.com/debian-15.2.1/ {{ ansible_distribution_release }} main"
+    state: present
+
+- name: Update apt and install ceph-common
+  apt: 
+    name: ceph-common
+    state: latest 
+    update_cache: yes
+

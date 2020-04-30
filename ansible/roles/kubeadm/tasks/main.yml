@@ -1,0 +1,73 @@
+
+  - name: Update all packages to the latest version
+    apt:
+      upgrade: dist
+      cache_valid_time: 3600
+
+  - name: Letting iptables see bridged traffic
+    block:
+
+    - name: Add the br_netfilter module
+      modprobe:
+        name: br_netfilter
+
+    - name: Making br_netfilter persist through reboot
+      lineinfile:
+        path: /etc/modules
+        line: br_netfilter
+        create: yes
+        
+    - name: Set sysctl variable
+      sysctl:
+        name: net.bridge.bridge-nf-call-iptables
+        value: '1'
+        state: present
+        sysctl_file: /etc/sysctl.d/k8s.conf
+
+  - name: Check all port numbers are free
+    wait_for:
+      host: 127.0.0.1
+      port: "{{ item }}"
+      state: stopped
+      timeout: 1
+    ignore_errors: yes
+    with_items:
+      - 6443
+      - 2379
+      - 2380
+      - 10250
+      - 10251
+      - 10252
+
+  - name: Install apt-transport-https
+    apt: 
+      name: apt-transport-https
+      state: latest
+      cache_valid_time: 3600
+
+  - name: Add signing key
+    apt_key:
+      url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+  - name: Add Kubernetes Repository
+    apt_repository:
+      repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+      state: present
+
+  - name: Install kubelet kubeadm kubectl
+    apt: 
+      name: 
+      - kubelet
+      - kubeadm
+      - kubectl
+      state: latest
+      update_cache: yes
+
+  - name: Hold Kube versions
+    dpkg_selections:
+      name: "{{item}}"
+      selection: hold
+    with_items:
+    - kubelet
+    - kubeadm
+    - kubectl

@@ -1,10 +1,12 @@
----
-- name: test ansible
-  hosts: all
-  tasks:
-    - name: Check if ansible user can do passwordless sudo
-      command: "true"
-      become: yes
-      register: result
-      failed_when: result is failed
-      changed_when: False
+- hosts: 
+  - test
+  become: yes
+
+  roles:
+  - role: docker
+    tags: ['never', 'docker']
+  - role: kubeadm
+    tags: ['never', 'kubeadm']
+  - role: kubeinit
+    tags: ['never', 'kubeinit']
+
