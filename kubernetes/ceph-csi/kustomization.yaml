@@ -1,0 +1,25 @@
+namespace: kube-system
+generatorOptions:
+  disableNameSuffixHash: true
+configMapGenerator:
+- name: ceph-csi-config
+  files:
+  - config.json
+- name: ceph-csi-encryption-kms-config
+  literals:
+  - config.json={}
+
+secretGenerator:
+- name: csi-rbd-secret
+  literals:
+  - userID=kubernetes
+  files:
+  - userKey
+
+resources:
+- csi-provisioner-rbac.yaml
+- csi-nodeplugin-rbac.yaml
+- csi-rbdplugin-provisioner.yaml
+- csi-rbdplugin.yaml
+- storage-class.yaml
+
