@@ -10,15 +10,14 @@ variable "pool_prefixes" {
   default     = ["10.10.0.0/16"]
 }
 
-variable "external_cidr" {
+variable "provider_cidr" {
   type = string
-  description = "CIDR of external LAN"
-  default = "192.168.178.0/24"
+  description = "CIDR of external provider LAN"
+  default = "192.168.178.0/24" 
 }
 
-variable "external_ip" {
+variable "provider_router_ip" {
   type = string
   description = "External IP Adress"
   default = "192.168.178.222"
 }
-
