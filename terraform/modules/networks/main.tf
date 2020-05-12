@@ -3,6 +3,7 @@ resource "openstack_networking_network_v2" "net" {
   for_each       = toset(var.network_names)
   name           = each.value
   admin_state_up = "true"
+  dns_domain = "local.kurz.site."
 }
 
 resource "openstack_networking_subnet_v2" "subnet" {

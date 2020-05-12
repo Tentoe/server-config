@@ -23,7 +23,7 @@ resource "openstack_compute_instance_v2" "kube_master" {
 
 resource "openstack_compute_instance_v2" "kube_worker0" {
 
-  name      = "kube-worker-0"
+  name      = "kubeworker0"
   flavor_id = openstack_compute_flavor_v2.medium.id
   key_pair  = openstack_compute_keypair_v2.default.id
   security_groups = [

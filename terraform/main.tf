@@ -13,3 +13,10 @@ module "networks" {
   source        = "./modules/networks"
   network_names = ["default", "ceph", "kube"]
 }
+
+resource "openstack_dns_zone_v2" "default" {
+  name        = "local.kurz.site."
+  email       = "tentoe86@gmail.com"
+  ttl         = 180
+  type        = "PRIMARY"
+}

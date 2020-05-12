@@ -6,3 +6,4 @@ variable "project_name" {
 variable "password" {
     default = "pass"
 }
+
