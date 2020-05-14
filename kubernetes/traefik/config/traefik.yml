@@ -1,0 +1,17 @@
+api:
+  insecure: true
+accessLog: {}
+entryPoints:
+  http:
+    address: ":80"
+  https:
+    address: ":443"
+providers:
+  kubernetesCRD: {}
+certificatesResolvers:
+  myresolver:
+    acme:
+      tlsChallenge: {}
+      email: tentoe86@gmail.com
+      storage: acme.json
+      caServer: https://acme-staging-v02.api.letsencrypt.org/directory

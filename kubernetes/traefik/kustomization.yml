@@ -1,0 +1,10 @@
+namespace: default
+configMapGenerator:
+- name: traefik-configmap
+  files:
+  - config/traefik.yml
+resources:
+- deployment.yml
+- kubernetes-crd-rbac.yml
+- kubernetes-crd-definition.yml
+- services.yml
