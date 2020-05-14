@@ -1,0 +1,15 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: keycloak-http
+  namespace: default
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`keycloak.kurz.site`)
+    kind: Rule
+    services:
+    - name: keycloak-http
+      port: 80
