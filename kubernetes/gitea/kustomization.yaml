@@ -1,0 +1,18 @@
+
+configMapGenerator:
+- name: gitea-config
+  literals:
+  - db-name=gitea
+  - db-user=gitea
+
+secretGenerator:
+- name: gitea-secret
+  files:
+  - db-pass-secret
+
+resources:
+- pvc.yaml
+- deployment.yaml
+- service.yaml
+- ingress-route.yaml
+
