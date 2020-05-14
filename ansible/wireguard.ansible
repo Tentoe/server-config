@@ -1,0 +1,74 @@
+- hosts: 
+  - wireguard.local.kurz.site
+  become: yes
+
+  tasks:
+
+  - name: Add wireguard repo
+    apt_repository:
+      repo: ppa:wireguard/wireguard
+
+  - name: Install required system packages
+    apt: 
+      name: 
+      - iptables-persistent
+      - "linux-headers-{{ ansible_kernel }}"
+      - openresolv
+      - curl
+      - wireguard-dkms
+      - wireguard-tools
+      state: latest 
+      cache_valid_time: 3600
+
+  - name: Configure network
+    template:
+      src: wireguard/99-netplan-config.yaml.j2
+      dest: /etc/netplan/99-netplan-config.yaml
+    register: network_config
+
+  - name: Apply netplan
+    shell: netplan apply
+    when: network_config.changed
+
+  - name: Enable ipv4 routing
+    sysctl:
+      name: net.ipv4.ip_forward
+      value: '1'
+
+  - name: Set the policy for the FORWARD chain to DROP
+    iptables:
+      chain: FORWARD
+      policy: DROP
+    register: iptables_policy
+  
+  - name: Allow private ip ranges
+    iptables:
+      chain: FORWARD
+      destination: "{{ item }}"
+      jump: ACCEPT
+    with_items:  [ '192.168.0.0/16', '172.16.0.0/12', '10.0.0.0/8' ]
+    register: iptables_forward
+
+  - name: Save iptables
+    shell: iptables-save > /etc/iptables/rules.v4
+    when: iptables_policy.changed or iptables_forward.changed
+  
+  - name: Create wireguard dir
+    file:
+      path: /etc/wireguard
+      state: directory
+      recurse: yes
+      owner: root
+      group: root
+      mode: '600'
+
+  - name: Copy wireguard config file
+    copy:
+      src: "wireguard-config/{{ wireguard_config }}.conf"
+      dest: /etc/wireguard/
+      owner: root
+      group: root
+      mode: '600'
+
+  # - name: Start wireguard tunnel
+  #   shell: "wg-quick up {{ wireguard_config }}"

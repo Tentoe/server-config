@@ -1,4 +1,9 @@
-.:53 {
-    forward . 8.8.8.8 9.9.9.9
-    log
+local.kurz.site. {
+    forward . 192.168.178.54:5354
+}
+fritz.box. {
+    forward . 192.168.178.1
+}
+. {
+    forward . 193.138.218.74 8.8.8.8 9.9.9.9
 }

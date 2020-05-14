@@ -1,13 +1,14 @@
 - hosts: pihole
   become: true
-
+  tags: ['never', 'install']
+  roles:
+  - role: docker
+    
   tasks:
 
-  - name: disable systemd-resolved
-    systemd:
-      name: systemd-resolved
-      enabled: no
-      state: stopped
+  - stat:
+      path: /etc/resolv.conf
+    register: resolvstat
 
   - name: Create static resolv.conf
     copy:
@@ -15,6 +16,7 @@
       dest: /etc/resolv.conf
       remote_src: yes
       follow: no
+    when: resolvstat.stat.islnk
 
   - name: Set nameserver
     lineinfile:
@@ -22,57 +24,29 @@
       regexp: '^nameserver '
       line: nameserver 8.8.8.8
 
-  - name: Install required system packages
-    apt: 
-      name:
-      - python3-pip
-      - virtualenv
-      - python3-setuptools
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - gnupg-agent
-      - software-properties-common
-      state: latest 
-      update_cache: yes
+  - name: disable systemd-resolved
+    systemd:
+      name: systemd-resolved
+      enabled: no
+      state: stopped
 
-  - name: Add Docker GPG apt Key
-    apt_key:
-      url: https://download.docker.com/linux/ubuntu/gpg
-      state: present
+- hosts: pihole
+  become: true
+    
+  tasks:
 
-  - name: Add Docker Repository
-    apt_repository:
-      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
-      state: present
-
-  - name: Update apt and install docker-ce
-    apt: 
-      name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      state: latest 
-      update_cache: yes
-
-  - name: Install Modules for Python
-    pip:
-      name:
-       - docker
-       - docker-compose
-
-
-  - name: Create docker-compose pihole dir
+  - name: Create docker-compose dir
     file:
-      path: /docker-compose/pihole/
+      path: /docker-compose/
       state: directory
 
-  - name: Copy pihole config
+  - name: Copy coredns config
     copy:
-      src: docker-compose-pihole.yml
-      dest: /docker-compose/pihole/docker-compose.yml
+      src: coredns
+      dest: /docker-compose/
 
-  - name: Create and start pihole
+  - name: Create and start coredns
     docker_compose:
-      project_src: /docker-compose/pihole
+      project_src: /docker-compose/coredns
+      restarted: yes
 

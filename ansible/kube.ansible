@@ -2,12 +2,13 @@
   - kube_master
   - kube_worker
   become: yes
-
+  tags: ['never', 'install']
   roles:
-  - role: docker
-    tags: ['never', 'install']
-  - role: kubeadm
-    tags: ['never', 'install']
+  - docker
+  - kubeadm
+  tasks:
+  - name: reboot
+    reboot:
 
 - hosts: kube_master
   become: yes
@@ -35,14 +36,7 @@
   tasks:
   - name: join cluster
     shell: |
-      {{ hostvars[groups['kube_master'][0]].kubeadm_join_cmd }} \
+      {{ hostvars[groups['kube_master'][0]].kubeadm_join_cmd }}
       >> /var/log/kubadm-join.log
 
 
-- hosts: 
-  - kube_master
-  - kube_worker
-  become: yes
-
-  roles:
-  - role: ceph-common

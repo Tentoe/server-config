@@ -12,15 +12,6 @@
     insertafter: '^    - --tls-private-key'
     line: "    - --feature-gates=ExpandCSIVolumes=true"
 
-- name: Wait for kube-apiserver to come online again
-  wait_for:
-    host: 127.0.0.1
-    port: 6443
-    timeout: 10
-
-- name: Installing a Pod network add-on Weave Net (CNI)
-  shell: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
-
 - name: Copy config file for kubeadm
   block:
   - name: Create dir
@@ -32,6 +23,15 @@
       src: /etc/kubernetes/admin.conf
       remote_src: yes
       dest: ~/.kube/config
+
+- name: Wait for kube-apiserver to come online again
+  wait_for:
+    host: "{{ ansible_host }}"
+    port: 6443
+    timeout: 10
+
+- name: Installing a Pod network add-on Weave Net (CNI)
+  shell: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
 - name: Fetch admin.conf
   fetch:
