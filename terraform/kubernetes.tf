@@ -1,6 +1,6 @@
-resource "openstack_compute_instance_v2" "kube_master" {
+resource "openstack_compute_instance_v2" "kubemaster0" {
 
-  name      = "kube-master-0"
+  name      = "kubemaster0"
   flavor_id = openstack_compute_flavor_v2.medium.id
   key_pair  = openstack_compute_keypair_v2.default.id
   security_groups = [
@@ -21,7 +21,7 @@ resource "openstack_compute_instance_v2" "kube_master" {
 }
 
 
-resource "openstack_compute_instance_v2" "kube_worker0" {
+resource "openstack_compute_instance_v2" "kubeworker0" {
 
   name      = "kubeworker0"
   flavor_id = openstack_compute_flavor_v2.medium.id
@@ -43,10 +43,16 @@ resource "openstack_compute_instance_v2" "kube_worker0" {
   }
 }
 
-output "kube_master_ip" {
-  value = openstack_compute_instance_v2.kube_master.access_ip_v4
+resource "openstack_dns_recordset_v2" "kubemaster0" {
+  zone_id = openstack_dns_zone_v2.default.id
+  name    = "${openstack_compute_instance_v2.kubemaster0.name}.${openstack_dns_zone_v2.default.name}"
+  type    = "A"
+  records = [openstack_compute_instance_v2.kubemaster0.access_ip_v4]
 }
 
-output "kube_worker_ip" {
-  value = openstack_compute_instance_v2.kube_worker0.access_ip_v4
+resource "openstack_dns_recordset_v2" "kubeworker0" {
+  zone_id = openstack_dns_zone_v2.default.id
+  name    = "${openstack_compute_instance_v2.kubeworker0.name}.${openstack_dns_zone_v2.default.name}"
+  type    = "A"
+  records = [openstack_compute_instance_v2.kubeworker0.access_ip_v4]
 }

@@ -67,7 +67,7 @@ resource "openstack_compute_instance_v2" "wireguard" {
 
 resource "openstack_dns_recordset_v2" "wireguard" {
   zone_id = openstack_dns_zone_v2.default.id
-  name    = "wireguard.${openstack_dns_zone_v2.default.name}"
+  name    = "${openstack_compute_instance_v2.wireguard.name}.${openstack_dns_zone_v2.default.name}"
   type    = "A"
   records = [openstack_compute_instance_v2.wireguard.access_ip_v4]
 }
