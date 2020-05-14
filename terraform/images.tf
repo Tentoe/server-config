@@ -30,11 +30,11 @@ resource "openstack_images_image_v2" "CirrOS" {
   min_ram_mb  = 512
 }
 
-resource "openstack_images_image_v2" "vyos" {
+resource "openstack_images_image_v2" "opnsense" {
   name             = "OPNsense"
-  local_file_path = "images/OPNsense-20.1-OpenSSL-dvd-amd64.iso"
+  local_file_path = "images/OPNsense-20.1-OpenSSL-nano-amd64.img"
   container_format = "bare"
-  disk_format      = "iso"
+  disk_format      = "raw"
 
   min_disk_gb = 10
   min_ram_mb  = 1024
