@@ -1,9 +1,22 @@
----
-- name: test
-  hosts: kirk
-  remote_user: kkurz
+
+- hosts: 
+  - all
+  - "!julia.fritz.box"
+  - "!julia"
+  become: yes
 
   tasks:
-    - name: install 
-      apt: python3-pip, needrestart
+  - name: Upgrade all packages to the latest version
+    apt:
+      name: "*"
+      state: latest
+      update_cache: yes
 
+  - name: Check if reboot is required
+    stat:
+      path: /var/run/reboot-required.pkgs
+    register: reboot_required
+
+  - name: Reboot if needed
+    reboot:
+    when: reboot_required.stat.exists

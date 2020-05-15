@@ -1,0 +1,15 @@
+all:
+  hosts:
+    kubemaster0.local.kurz.site:
+    kubeworker0.local.kurz.site:
+    kubeworker1.local.kurz.site:
+  vars:
+    ansible_user: ubuntu
+  children:
+    kube_master:
+      hosts:
+        kubemaster0.local.kurz.site:
+    kube_worker:
+      hosts:
+        kubeworker0.local.kurz.site:
+        kubeworker1.local.kurz.site:

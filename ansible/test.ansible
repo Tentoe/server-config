@@ -1,12 +1,12 @@
-- hosts: 
-  - test
+- hosts:
+  - all
+  - "!julia.fritz.box"
+  - "!julia"
+
   become: yes
 
-  roles:
-  - role: docker
-    tags: ['never', 'docker']
-  - role: kubeadm
-    tags: ['never', 'kubeadm']
-  - role: kubeinit
-    tags: ['never', 'kubeinit']
+  tasks:
+
+  - name: ping
+    ping:
 
