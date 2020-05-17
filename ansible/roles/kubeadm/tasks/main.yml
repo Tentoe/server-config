@@ -57,10 +57,10 @@
   - name: Install kubelet kubeadm kubectl
     apt: 
       name: 
-      - kubelet
-      - kubeadm
-      - kubectl
-      state: latest
+      - "kubelet={{ kubernetes_version }}"
+      - "kubeadm={{ kubernetes_version }}"
+      - "kubectl={{ kubernetes_version }}"
+      state: present
       update_cache: yes
 
   - name: Hold Kube versions

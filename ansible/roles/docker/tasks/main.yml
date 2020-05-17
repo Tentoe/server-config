@@ -41,3 +41,13 @@
     name:
       - docker
       - docker-compose
+
+- name: Configure Docker
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+
+- name: Reload Docker
+  service:
+    name: docker
+    state: restarted

@@ -81,9 +81,13 @@ kubeadm join 10.10.2.58:6443 --token tmix1q.v2nl4rjy0ejl09bl \
 
 ### Keystone
 
-
-```
 - `openstack group create federated_users`
 - `openstack project create federated_project`
 - `openstack role add --group federated_users --project federated_project member`
 - `openstack federation protocol create saml2 --mapping samltest_mapping --identity-provider samltest`
+
+### SSH Proxy
+
+```bash
+ssh -L 8080:10.10.0.142:443 ubuntu@10.10.0.57
+```

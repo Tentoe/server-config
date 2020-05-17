@@ -7,8 +7,14 @@
   - docker
   - kubeadm
   tasks:
-  - name: reboot
+  - name: Check if reboot is required
+    stat:
+      path: /var/run/reboot-required.pkgs
+    register: reboot_required
+
+  - name: Reboot if needed
     reboot:
+    when: reboot_required.stat.exists
 
 - hosts: kube_master
   become: yes
@@ -17,9 +23,10 @@
   - role: kubeinit
     tags: ['never', 'init']
 
+
 - hosts: "{{ groups['kube_master'][0] }}" 
   become: yes
-  tags: ['never', 'init']
+  tags: ['never', 'join']
   tasks:
 
   - name: Create new token
@@ -32,11 +39,15 @@
   
 - hosts: kube_worker
   become: yes
-  tags: ['never', 'init']
+  tags: ['never', 'join']
   tasks:
+  - name: Check if worker ist already joined
+    stat:
+      path: /etc/kubernetes/kubelet.conf
+    register: already_joined
+
   - name: join cluster
-    shell: |
+    shell: >
       {{ hostvars[groups['kube_master'][0]].kubeadm_join_cmd }}
       >> /var/log/kubadm-join.log
-
-
+    when: not already_joined.stat.exists

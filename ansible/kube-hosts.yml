@@ -5,6 +5,7 @@ all:
     kubeworker1.local.kurz.site:
   vars:
     ansible_user: ubuntu
+    kubernetes_version: 1.18.2-00
   children:
     kube_master:
       hosts:

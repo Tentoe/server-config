@@ -9,8 +9,14 @@
 - name: Set feature-gate for resizing volumes
   lineinfile:
     path: /etc/kubernetes/manifests/kube-apiserver.yaml
-    insertafter: '^    - --tls-private-key'
+    insertafter: '^    - kube-apiserver'
     line: "    - --feature-gates=ExpandCSIVolumes=true"
+
+- name: Enable Plugin NodeRestriction
+  lineinfile:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+    insertafter: '^    - kube-apiserver'
+    line: "    - --enable-admission-plugins=NodeRestriction"
 
 - name: Copy config file for kubeadm
   block:

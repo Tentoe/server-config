@@ -19,6 +19,7 @@ metadata:
   labels:
     app: gitea
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: gitea
