@@ -6,7 +6,7 @@
   roles:
   - docker
   - kubeadm
-  tasks:
+  tasks: # TODO change reboot to handler
   - name: Check if reboot is required
     stat:
       path: /var/run/reboot-required.pkgs

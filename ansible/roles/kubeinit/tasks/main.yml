@@ -1,6 +1,6 @@
 
 - name: Init Kubernetes cluster
-  shell: "kubeadm init --pod-network-cidr={{ pod_network_cidr }} | tee /var/log/kubadm-init.log"
+  shell: "kubeadm init | tee /var/log/kubadm-init.log"
 
 - name: Set feature-gate for resizing volumes
   lineinfile:
@@ -32,8 +32,8 @@
     delay: 1
     timeout: 10
 
-- name: Installing a Pod network add-on (CNI)
-  shell: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+- name: Installing a Pod network add-on Weave Net (CNI)
+  shell: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
 - name: Fetch admin.conf
   fetch:

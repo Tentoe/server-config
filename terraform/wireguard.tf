@@ -2,7 +2,6 @@
 resource "openstack_networking_network_v2" "wireguard" {
   name           = "wireguard"
   admin_state_up = "true"
-  dns_domain     = "local.kurz.site."
 }
 
 resource "openstack_networking_subnet_v2" "wireguard" {

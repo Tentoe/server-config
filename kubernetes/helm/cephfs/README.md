@@ -1,8 +1,8 @@
 # Cephfs
 
 - `kubectl create namespace ceph-csi-cephfs`
-- `helm install -f values.yaml --namespace "ceph-csi-cephfs" "ceph-csi-cephfs" ceph-csi/ceph-csi-cephfs --version 2.1.0`
 - `kubectl apply -f secrets.yaml`
+- `helm install -f values.yaml --namespace "ceph-csi-cephfs" "ceph-csi-cephfs" ceph-csi/ceph-csi-cephfs --version 2.1.0`
 - `kubectl apply -f storageclass.yaml`
 
 ## Secret

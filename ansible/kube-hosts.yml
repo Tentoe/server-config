@@ -2,7 +2,6 @@ all:
   hosts:
     kubemaster0.local.kurz.site:
     kubeworker0.local.kurz.site:
-    kubeworker1.local.kurz.site:
   vars:
     ansible_user: ubuntu
     kubernetes_version: 1.18.2-00
@@ -13,4 +12,3 @@ all:
     kube_worker:
       hosts:
         kubeworker0.local.kurz.site:
-        kubeworker1.local.kurz.site:
