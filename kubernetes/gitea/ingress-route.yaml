@@ -3,12 +3,11 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: gitea
-  namespace: default
 spec:
   entryPoints:
     - web
   routes:
-  - match: Host(`git.kurz.site`)
+  - match: Host(`git.kurz.site`) || (Host(`git2.kurz.site`)
     kind: Rule
     services:
     - name: gitea

@@ -10,3 +10,41 @@ spec:
     requests:
       storage: 50Gi
   storageClassName: cephfs-retain
+  volumeName: pvc-fb90d536-4f94-4a67-8e27-02e7a404a0f1
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: movies
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Ti
+  storageClassName: cephfs-retain
+  volumeName: pvc-f98db987-4203-4151-9136-1c537d845b63
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: tv
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Ti
+  storageClassName: cephfs-retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: anime
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Ti
+  storageClassName: cephfs-retain

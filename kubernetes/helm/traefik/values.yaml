@@ -98,7 +98,7 @@ ports:
     # The exposed port for this service
     exposedPort: 9000
   web:
-    port: 8000
+    port: 8080
     # hostPort: 8000
     expose: true
     exposedPort: 80
@@ -129,7 +129,8 @@ service:
     # - 192.168.0.1/32
     # - 172.16.0.0/16
   externalIPs: 
-  - 10.10.1.185
+  - 10.11.3.137
+  - 10.11.0.37
     # - 1.2.3.4
 
 ## Create HorizontalPodAutoscaler object.

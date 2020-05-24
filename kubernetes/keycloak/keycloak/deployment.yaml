@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      initContainers:
+      - name: wait-postgres
+        image: busybox:1.31
+        command: ['sh', '-c', "until nc -z postgres 5432; do echo waiting for postgres; sleep 2; done"]
+      containers:
+      - name: keycloak
+        image: quay.io/keycloak/keycloak:10.0.1
+        env:
+        - name: DB_VENDOR
+          value: POSTGRES
+        - name: DB_ADDR
+          value: postgres
+        - name: DB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: config
+              key: db-name
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: config
+              key: db-user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: db-pass-secret
+        - name: KEYCLOAK_USER
+          value: admin
+        - name: KEYCLOAK_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: admin-pass-secret
+        - name: PROXY_ADDRESS_FORWARDING
+          value: "true"
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8443
+        readinessProbe:
+          httpGet:
+            path: /auth/realms/master
+            port: 8080

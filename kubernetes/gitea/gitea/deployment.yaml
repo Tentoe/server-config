@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitea
+  labels:
+    app: gitea
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: gitea
+  template:
+    metadata:
+      labels:
+        app: gitea
+    spec:
+      containers:
+      - name: gitea
+        image: gitea/gitea:1
+        ports:
+        - containerPort: 2222
+        - containerPort: 3000
+        env:
+        - name: DB_TYPE
+          value: postgres
+        - name: DB_HOST
+          value: postgres:5432
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: config
+              key: db-name
+        - name: DB_USER
+          valueFrom:
+            configMapKeyRef:
+              name: config
+              key: db-user
+        - name: DB_PASSWD
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: db-pass-secret
+        - name: SSH_DOMAIN
+          value: git.kurz.site
+        - name: ROOT_URL
+          value: https://git.kurz.site
+        - name: HTTP_PORT
+          value: "3000"
+        - name: SSH_PORT
+          value: "2222"
+        - name: DISABLE_REGISTRATION
+          value: "true"
+        volumeMounts:
+        - name: data
+          mountPath: "/data"
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: data

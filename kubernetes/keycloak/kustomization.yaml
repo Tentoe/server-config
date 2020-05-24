@@ -1,0 +1,25 @@
+namespace: keycloak
+
+configMapGenerator:
+- name: config
+  literals:
+  - db-name=keycloak
+  - db-user=keycloak
+
+secretGenerator:
+- name: secret
+  files:
+  - db-pass-secret
+  - admin-pass-secret
+  - ldap-admin-pass-secret
+  - ldap-config-pass-secret
+  - ldap-readonly-pass-secret
+
+bases:
+- keycloak
+- postgres
+- openldap
+
+resources:
+- ingress-route.yaml
+

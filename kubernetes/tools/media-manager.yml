@@ -3,25 +3,54 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: ubuntu
+  name: media-manager
   labels:
-    app: ubuntu
+    app: media-manager
 spec:
   restartPolicy: Always
   containers:
-  - name: ubuntu
+  - name: media-manager
     image: ubuntu
     securityContext:
       privileged: true
     command:
       - sleep
-      - "259200"
+      - "604800"
     volumeMounts:
     - name: music
       mountPath: "/new/music"
+    - name: movies
+      mountPath: "/new/movies"
+    - name: tv
+      mountPath: "/new/tv"
+    - name: anime
+      mountPath: "/new/anime"
   volumes:
   - name: music
     persistentVolumeClaim:
       claimName: music
+  - name: movies
+    persistentVolumeClaim:
+      claimName: movies
+  - name: tv
+    persistentVolumeClaim:
+      claimName: tv
+  - name: anime
+    persistentVolumeClaim:
+      claimName: anime
+# apt update && apt install rsync ssh vim -y
 # ssh kkurz@192.168.178.28:/sharedfolders/music
 # /sharedfolders/music
+# rsync -aPv kkurz@192.168.178.28:/sharedfolders/movies/ /new/movies
+# rsync -aPv kkurz@192.168.178.28:/sharedfolders/tv/ /new/tv
+# rsync -aPv kkurz@192.168.178.28:/sharedfolders/anime/ /new/anime
+# rsync -aPv -og --chown=1000:1000 --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r kkurz@192.168.178.28:/sharedfolders/movies/ /new/movies
+# rsync -aPv -og --chown=1000:1000 --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r kkurz@192.168.178.28:/sharedfolders/tv/ /new/tv
+# ssh -Q cipher localhost | paste -d , -s 
+# cat list | parallel -j 3 rsync -aPv -og --chown=1000:1000 --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r kkurz@192.168.178.28:/sharedfolders/movies/{} /new/movies/{}
+ 
+# ssh-keygen
+# ssh-copy-id -i ~/.ssh/id_rsa.pub kkurz@192.168.178.28
+# sed -i -e 's/(/\\(/g' list
+# sed -i -e 's/)/\\)/g' list
+# sed -i -e 's/ /\\ /g' list

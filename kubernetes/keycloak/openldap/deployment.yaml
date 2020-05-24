@@ -1,0 +1,61 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openldap
+  labels:
+    app: openldap
+spec:
+  selector:
+    matchLabels:
+      app: openldap
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: openldap
+    spec:
+      containers:
+      - name: db
+        image: osixia/openldap:1.3.0
+        ports:
+          - name: ldap
+            containerPort: 389
+          - name: ldaps
+            containerPort: 636
+        env:
+        - name: LDAP_ORGANISATION
+          value: kurz.site
+        - name: LDAP_DOMAIN
+          value: kurz.site
+        - name: LDAP_READONLY_USER
+          value: "true"
+        - name: LDAP_READONLY_USER_USERNAME
+          value: readonly
+        - name: LDAP_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: ldap-admin-pass-secret
+        - name: LDAP_CONFIG_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: ldap-config-pass-secret
+        - name: LDAP_READONLY_USER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: ldap-readonly-pass-secret
+        volumeMounts:
+        - name: openldap
+          mountPath: /var/lib/ldap
+          subPath: ldapdata
+        - name: openldap
+          mountPath: /etc/ldap/slapd.d
+          subPath: ldapconfig
+      volumes:
+      - name: openldap
+        persistentVolumeClaim:
+          claimName: openldap

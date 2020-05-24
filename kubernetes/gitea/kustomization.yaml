@@ -1,18 +1,20 @@
+namespace: gitea
+
+bases:
+- postgres
+- gitea
+
+resources:
+- ingress-route.yaml
 
 configMapGenerator:
-- name: gitea-config
+- name: config
   literals:
   - db-name=gitea
   - db-user=gitea
 
 secretGenerator:
-- name: gitea-secret
+- name: secret
   files:
   - db-pass-secret
-
-resources:
-- pvc.yaml
-- deployment.yaml
-- service.yaml
-- ingress-route.yaml
 

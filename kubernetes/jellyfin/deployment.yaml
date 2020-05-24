@@ -24,7 +24,6 @@ spec:
           allowPrivilegeEscalation: true
           runAsUser: 1000
           runAsGroup: 1000
-        env:
         volumeMounts:
         - name: transcoding-temp
           mountPath: "/config/transcoding-temp"
@@ -34,6 +33,12 @@ spec:
           mountPath: "/config"
         - name: music
           mountPath: "/media/music"
+        - name: movies
+          mountPath: "/media/movies"
+        - name: tv
+          mountPath: "/media/tv"
+        - name: anime
+          mountPath: "/media/anime"
       volumes:
       - name: transcoding-temp
         emptyDir: {}
@@ -46,3 +51,12 @@ spec:
       - name: music
         persistentVolumeClaim:
           claimName: music
+      - name: movies
+        persistentVolumeClaim:
+          claimName: movies
+      - name: tv
+        persistentVolumeClaim:
+          claimName: tv
+      - name: anime
+        persistentVolumeClaim:
+          claimName: anime
