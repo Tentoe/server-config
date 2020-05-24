@@ -32,3 +32,15 @@ resource "openstack_compute_flavor_access_v2" "access_medium" {
   tenant_id = data.openstack_identity_project_v3.project.id
   flavor_id = openstack_compute_flavor_v2.medium.id
 }
+
+resource "openstack_compute_flavor_v2" "large" {
+  name  = "large"
+  ram   = "8192"
+  vcpus = "4"
+  disk  = "50"
+}
+
+resource "openstack_compute_flavor_access_v2" "access_large" {
+  tenant_id = data.openstack_identity_project_v3.project.id
+  flavor_id = openstack_compute_flavor_v2.large.id
+}

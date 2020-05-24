@@ -3,10 +3,12 @@ resource "openstack_compute_instance_v2" "kubemaster0" {
   name      = "kubemaster0"
   flavor_id = openstack_compute_flavor_v2.medium.id
   key_pair  = openstack_compute_keypair_v2.default.id
-
+  security_groups = [
+    openstack_networking_secgroup_v2.all.name
+  ]
 
   network {
-    port = openstack_networking_port_v2.kubemaster0.id
+    uuid = openstack_networking_network_v2.wireguard.id
   }
 
   block_device {
@@ -16,13 +18,6 @@ resource "openstack_compute_instance_v2" "kubemaster0" {
     destination_type      = "volume"
     delete_on_termination = true
   }
-}
-
-resource "openstack_networking_port_v2" "kubemaster0" {
-  name                  = "kubemaster0"
-  network_id            = openstack_networking_network_v2.wireguard.id
-  admin_state_up        = "true"
-  port_security_enabled = false
 }
 
 resource "openstack_dns_recordset_v2" "kubemaster0" {
@@ -35,12 +30,14 @@ resource "openstack_dns_recordset_v2" "kubemaster0" {
 resource "openstack_compute_instance_v2" "kubeworker0" {
 
   name      = "kubeworker0"
-  flavor_id = openstack_compute_flavor_v2.medium.id
+  flavor_id = openstack_compute_flavor_v2.large.id
   key_pair  = openstack_compute_keypair_v2.default.id
-
+  security_groups = [
+    openstack_networking_secgroup_v2.all.name
+  ]
 
   network {
-    port = openstack_networking_port_v2.kubeworker0.id
+    uuid = openstack_networking_network_v2.wireguard.id
   }
 
   block_device {
@@ -50,13 +47,6 @@ resource "openstack_compute_instance_v2" "kubeworker0" {
     destination_type      = "volume"
     delete_on_termination = true
   }
-}
-
-resource "openstack_networking_port_v2" "kubeworker0" {
-  name                  = "kubeworker0"
-  network_id            = openstack_networking_network_v2.wireguard.id
-  admin_state_up        = "true"
-  port_security_enabled = false
 }
 
 resource "openstack_dns_recordset_v2" "kubeworker0" {
