@@ -16,3 +16,10 @@ output "provider_router" {
 output "provider_router_interfaces" {
   value = openstack_networking_router_interface_v2.net_router_if
 }
+
+output "provider_net" {
+  value = openstack_networking_network_v2.provider_network
+}
+output "provider_subnet" {
+  value = openstack_networking_subnet_v2.provider_subnet
+}
