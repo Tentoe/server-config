@@ -6,7 +6,6 @@ metadata:
   labels:
     app: gitea
 spec:
-  replicas: 1
   strategy:
     type: Recreate
   selector:

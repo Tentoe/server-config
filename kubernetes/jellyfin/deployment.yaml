@@ -6,7 +6,8 @@ metadata:
   labels:
     app: jellyfin
 spec:
-  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: jellyfin
@@ -21,12 +22,11 @@ spec:
         ports:
         - containerPort: 8096
         securityContext:
-          allowPrivilegeEscalation: true
           runAsUser: 1000
           runAsGroup: 1000
         volumeMounts:
-        - name: transcoding-temp
-          mountPath: "/config/transcoding-temp"
+        - name: transcodes
+          mountPath: "/config/transcodes"
         - name: cache
           mountPath: "/cache"
         - name: config
@@ -40,7 +40,7 @@ spec:
         - name: anime
           mountPath: "/media/anime"
       volumes:
-      - name: transcoding-temp
+      - name: transcodes
         emptyDir: {}
       - name: cache
         persistentVolumeClaim:
