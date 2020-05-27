@@ -1,0 +1,14 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: syncthing
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`syncthing.kurz.site`)
+    kind: Rule
+    services:
+    - name: syncthing
+      port: 8384
