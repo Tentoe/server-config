@@ -51,6 +51,3 @@ spec:
  
 # ssh-keygen
 # ssh-copy-id -i ~/.ssh/id_rsa.pub kkurz@192.168.178.28
-# sed -i -e 's/(/\\(/g' list
-# sed -i -e 's/)/\\)/g' list
-# sed -i -e 's/ /\\ /g' list

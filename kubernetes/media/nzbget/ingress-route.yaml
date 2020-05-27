@@ -1,0 +1,14 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nzbget
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`nzbget.kurz.site`) || (Host(`nzbget2.kurz.site`)
+    kind: Rule
+    services:
+    - name: nzbget
+      port: 80

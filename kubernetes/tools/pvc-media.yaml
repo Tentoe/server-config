@@ -48,3 +48,15 @@ spec:
     requests:
       storage: 1Ti
   storageClassName: cephfs-retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: downloads
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: cephfs

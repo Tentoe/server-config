@@ -1,0 +1,14 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: radarr
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`radarr.kurz.site`) || (Host(`radarr2.kurz.site`)
+    kind: Rule
+    services:
+    - name: radarr
+      port: 80

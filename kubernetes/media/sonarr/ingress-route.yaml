@@ -1,0 +1,14 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sonarr
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`sonarr.kurz.site`) || (Host(`sonarr2.kurz.site`)
+    kind: Rule
+    services:
+    - name: sonarr
+      port: 80

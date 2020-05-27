@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nzbget
+  labels:
+    app: nzbget
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nzbget
+  template:
+    metadata:
+      labels:
+        app: nzbget
+    spec:
+      containers:
+      - name: nzbget
+        image: linuxserver/nzbget
+        ports:
+        - containerPort: 6789
+        env:
+        - name: PUID
+          value: 1000
+        - name: PGID
+          value: 1000
+        - name: TZ
+          value: Europe/Berlin
+        volumeMounts:
+        - name: nzbget-config
+          mountPath: /config
+        - name: downloads
+          mountPath: /downloads
+      volumes:
+      - name: nzbget-config
+        persistentVolumeClaim:
+          claimName: nzbget-config
+      - name: downloads
+        persistentVolumeClaim:
+          claimName: downloads

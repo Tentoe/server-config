@@ -1,0 +1,6 @@
+namespace: default
+
+bases:
+- nzbget
+- sonarr
+- radarr

@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+  labels:
+    app: sonarr
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+      - name: sonarr
+        image: linuxserver/sonarr
+        ports:
+        - containerPort: 8989
+        env:
+        - name: PUID
+          value: 1000
+        - name: PGID
+          value: 1000
+        - name: UMASK_SET
+          value: "022"
+        - name: TZ
+          value: Europe/Berlin
+        volumeMounts:
+        - name: sonarr-config
+          mountPath: /config
+        - name: downloads
+          mountPath: /downloads
+        - name: tv
+          mountPath: /tv
+        - name: anime
+          mountPath: /anime
+      volumes:
+      - name: sonarr-config
+        persistentVolumeClaim:
+          claimName: sonarr-config
+      - name: downloads
+        persistentVolumeClaim:
+          claimName: downloads
+      - name: tv
+        persistentVolumeClaim:
+          claimName: tv
+      - name: anime
+        persistentVolumeClaim:
+          claimName: anime
