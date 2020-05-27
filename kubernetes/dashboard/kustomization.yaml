@@ -1,0 +1,5 @@
+
+resources:
+- recommended.yaml
+- ingress-route.yaml
+

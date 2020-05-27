@@ -55,6 +55,7 @@ additionalArguments:
 - --certificatesresolvers.myresolver.acme.email=tentoe86@gmail.com
 - --certificatesresolvers.myresolver.acme.storage=/data/acme.json
 - --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+- --serverstransport.insecureskipverify=true
 #  - "--providers.kubernetesingress"
 #  - "--logs.level=DEBUG"
 

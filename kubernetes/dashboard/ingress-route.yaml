@@ -1,0 +1,16 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kubernetes-dashboard
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`k8s.kurz.site`)
+    kind: Rule
+    services:
+    - name: kubernetes-dashboard
+      port: 443
+      scheme: https
+      namespace: kubernetes-dashboard
