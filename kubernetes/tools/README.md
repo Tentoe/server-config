@@ -5,8 +5,8 @@
 
 ```bash
 chown -R 1000:1000 *
-find . -type d -exec chmod 755 {} \;
-find . -type f -exec chmod 644 {} \;
+find * -type d -exec chmod 755 {} \;
+find * -type f -exec chmod 644 {} \;
 ```
 
 ```bash

@@ -38,16 +38,16 @@ spec:
   - name: anime
     persistentVolumeClaim:
       claimName: anime
-# apt update && apt install rsync ssh vim -y
+# apt update && DEBIAN_FRONTEND=noninteractive apt install rsync ssh vim -y
 # ssh kkurz@192.168.178.28:/sharedfolders/music
 # /sharedfolders/music
-# rsync -aPv kkurz@192.168.178.28:/sharedfolders/movies/ /new/movies
-# rsync -aPv kkurz@192.168.178.28:/sharedfolders/tv/ /new/tv
-# rsync -aPv kkurz@192.168.178.28:/sharedfolders/anime/ /new/anime
+# rsync -auPv kkurz@192.168.178.28:/sharedfolders/movies/ /new/movies
+# rsync -auPv kkurz@192.168.178.28:/sharedfolders/tv/ /new/tv
+# rsync -auPv kkurz@192.168.178.28:/sharedfolders/anime/ /new/anime
 # rsync -aPv -og --chown=1000:1000 --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r kkurz@192.168.178.28:/sharedfolders/movies/ /new/movies
 # rsync -aPv -og --chown=1000:1000 --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r kkurz@192.168.178.28:/sharedfolders/tv/ /new/tv
 # ssh -Q cipher localhost | paste -d , -s 
 # cat list | parallel -j 3 rsync -aPv -og --chown=1000:1000 --chmod=Du=rwx,Dg=rx,Do=rx,Fu=rw,Fg=r,Fo=r kkurz@192.168.178.28:/sharedfolders/movies/{} /new/movies/{}
  
-# ssh-keygen
+# ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N "
 # ssh-copy-id -i ~/.ssh/id_rsa.pub kkurz@192.168.178.28
