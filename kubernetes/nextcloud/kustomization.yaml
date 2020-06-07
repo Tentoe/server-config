@@ -1,0 +1,21 @@
+namespace: nextcloud
+
+bases:
+- postgres
+- nextcloud
+
+resources:
+- ingress-route.yaml
+
+configMapGenerator:
+- name: config
+  literals:
+  - db-name=nextcloud
+  - db-user=nextcloud
+
+secretGenerator:
+- name: secret
+  files:
+  - db-pass-secret
+  - admin-pass-secret
+

@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud
+  labels:
+    app: nextcloud
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nextcloud
+  template:
+    metadata:
+      labels:
+        app: nextcloud
+    spec:
+      containers:
+      - name: nextcloud
+        image: nextcloud:18-apache
+        ports:
+        - containerPort: 80
+        env:
+        - name: NEXTCLOUD_TRUSTED_DOMAINS
+          value: nextcloud2.kurz.site nextcloud.kurz.site
+        - name: NEXTCLOUD_ADMIN_USER
+          value: admin
+        - name: NEXTCLOUD_ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: admin-pass-secret
+        - name: POSTGRES_HOST
+          value: postgres
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              name: config
+              key: db-user
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: config
+              key: db-name
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: secret
+              key: db-pass-secret
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+        - name: nextcloud
+          mountPath: "/var/www/html"
+      volumes:
+      - name: tz-config
+        hostPath:
+          path: /usr/share/zoneinfo/Europe/Berlin
+          type: File
+      - name: nextcloud
+        persistentVolumeClaim:
+          claimName: nextcloud
