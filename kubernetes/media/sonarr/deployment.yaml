@@ -23,13 +23,25 @@ spec:
         - containerPort: 8989
         env:
         - name: PUID
-          value: 1000
+          valueFrom:
+            configMapKeyRef:
+              name: media-config
+              key: user
         - name: PGID
-          value: 1000
+          valueFrom:
+            configMapKeyRef:
+              name: media-config
+              key: group
         - name: UMASK_SET
-          value: "022"
+          valueFrom:
+            configMapKeyRef:
+              name: media-config
+              key: umask
         - name: TZ
-          value: Europe/Berlin
+          valueFrom:
+            configMapKeyRef:
+              name: media-config
+              key: timezone
         volumeMounts:
         - name: sonarr-config
           mountPath: /config

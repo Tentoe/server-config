@@ -4,3 +4,11 @@ bases:
 - nzbget
 - sonarr
 - radarr
+
+configMapGenerator:
+- name: media-config
+  literals:
+  - user=1000
+  - group=1000
+  - timezone=Europe/Berlin
+  - umask=022

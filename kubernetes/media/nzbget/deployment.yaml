@@ -23,20 +23,31 @@ spec:
         - containerPort: 6789
         env:
         - name: PUID
-          value: 1000
+          valueFrom:
+            configMapKeyRef:
+              name: media-config
+              key: user
         - name: PGID
-          value: 1000
+          valueFrom:
+            configMapKeyRef:
+              name: media-config
+              key: group
         - name: TZ
-          value: Europe/Berlin
+          valueFrom:
+            configMapKeyRef:
+              name: media-config
+              key: timezone
         volumeMounts:
         - name: nzbget-config
           mountPath: /config
-        - name: downloads
-          mountPath: /downloads
+        - name: tz-config
+          mountPath: /etc/localtime
+
       volumes:
+      - name: tz-config
+        hostPath:
+          path: /usr/share/zoneinfo/Europe/Berlin
+          type: File
       - name: nzbget-config
         persistentVolumeClaim:
           claimName: nzbget-config
-      - name: downloads
-        persistentVolumeClaim:
-          claimName: downloads
