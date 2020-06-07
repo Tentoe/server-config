@@ -44,3 +44,15 @@ resource "openstack_compute_flavor_access_v2" "access_large" {
   tenant_id = data.openstack_identity_project_v3.project.id
   flavor_id = openstack_compute_flavor_v2.large.id
 }
+
+resource "openstack_compute_flavor_v2" "fw" {
+  name  = "fw"
+  ram   = "1024"
+  vcpus = "2"
+  disk  = "20"
+}
+
+resource "openstack_compute_flavor_access_v2" "access_fw" {
+  tenant_id = data.openstack_identity_project_v3.project.id
+  flavor_id = openstack_compute_flavor_v2.fw.id
+}

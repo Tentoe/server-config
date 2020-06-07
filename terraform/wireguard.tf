@@ -35,18 +35,10 @@ resource "openstack_networking_port_v2" "wireguard_firewall" {
 }
 
 
-# resource "openstack_networking_router_route_v2" "wireguard" {
-#   depends_on       = [module.networks]
-#   router_id        = module.networks.provider_router.id
-#   destination_cidr = openstack_networking_subnet_v2.wireguard.cidr
-#   next_hop         = openstack_compute_instance_v2.wireguard.access_ip_v4
-# }
-
-
 resource "openstack_compute_instance_v2" "wireguard" {
 
   name      = "wireguard"
-  flavor_id = openstack_compute_flavor_v2.micro.id
+  flavor_id = openstack_compute_flavor_v2.fw.id
   key_pair  = openstack_compute_keypair_v2.default.id
 
   network {
