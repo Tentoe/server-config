@@ -91,3 +91,10 @@ kubeadm join 10.10.2.58:6443 --token tmix1q.v2nl4rjy0ejl09bl \
 ```bash
 ssh -L 8080:10.10.0.142:443 ubuntu@10.10.0.57
 ```
+
+### Backups
+
+```bash
+openstack server show $instance -f value -c volumes_attached
+openstack volume backup create --name docker-copose-host --container backup-vm --force 9ec95201-dca7-477a-b069-99ab03960ea6
+```
