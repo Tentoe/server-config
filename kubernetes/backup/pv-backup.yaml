@@ -5,6 +5,105 @@ items:
   metadata:
     annotations:
       pv.kubernetes.io/provisioned-by: cephfs.csi.ceph.com
+    creationTimestamp: "2020-05-27T20:47:06Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:namespace: {}
+            f:resourceVersion: {}
+            f:uid: {}
+          f:csi:
+            .: {}
+            f:controllerExpandSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:driver: {}
+            f:fsType: {}
+            f:nodeStageSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:volumeAttributes:
+              .: {}
+              f:clusterID: {}
+              f:fsName: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:mountOptions: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: csi-provisioner
+      operation: Update
+      time: "2020-05-27T20:47:06Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2020-05-27T20:47:06Z"
+    name: pvc-26dbc8c8-9ea7-4d75-b200-cf53c25fdf99
+    resourceVersion: "1434531"
+    selfLink: /api/v1/persistentvolumes/pvc-26dbc8c8-9ea7-4d75-b200-cf53c25fdf99
+    uid: 21c26eac-1eae-42b3-9ba0-58e3b2276b92
+  spec:
+    accessModes:
+    - ReadWriteMany
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: downloads
+      namespace: default
+      resourceVersion: "1434514"
+      uid: 26dbc8c8-9ea7-4d75-b200-cf53c25fdf99
+    csi:
+      controllerExpandSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      driver: cephfs.csi.ceph.com
+      fsType: ext4
+      nodeStageSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      volumeAttributes:
+        clusterID: 9234f042-7c20-11ea-b005-002590f3680a
+        fsName: manila
+        storage.kubernetes.io/csiProvisionerIdentity: 1590603493995-8081-cephfs.csi.ceph.com
+      volumeHandle: 0001-0024-9234f042-7c20-11ea-b005-002590f3680a-0000000000000001-3901004b-a05b-11ea-a4fd-2e98c159ca14
+    mountOptions:
+    - debug
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: cephfs
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: cephfs.csi.ceph.com
     creationTimestamp: "2020-05-23T17:48:36Z"
     finalizers:
     - kubernetes.io/pv-protection
@@ -302,6 +401,105 @@ items:
   metadata:
     annotations:
       pv.kubernetes.io/provisioned-by: cephfs.csi.ceph.com
+    creationTimestamp: "2020-05-28T18:14:58Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:namespace: {}
+            f:resourceVersion: {}
+            f:uid: {}
+          f:csi:
+            .: {}
+            f:controllerExpandSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:driver: {}
+            f:fsType: {}
+            f:nodeStageSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:volumeAttributes:
+              .: {}
+              f:clusterID: {}
+              f:fsName: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:mountOptions: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: csi-provisioner
+      operation: Update
+      time: "2020-05-28T18:14:58Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2020-05-28T18:14:58Z"
+    name: pvc-511fabda-ec40-48ef-b508-2b5e7bb9173e
+    resourceVersion: "1660477"
+    selfLink: /api/v1/persistentvolumes/pvc-511fabda-ec40-48ef-b508-2b5e7bb9173e
+    uid: 79232f01-9177-40c5-8e4e-cc50eaccda6d
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: nzbget-config
+      namespace: default
+      resourceVersion: "1660439"
+      uid: 511fabda-ec40-48ef-b508-2b5e7bb9173e
+    csi:
+      controllerExpandSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      driver: cephfs.csi.ceph.com
+      fsType: ext4
+      nodeStageSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      volumeAttributes:
+        clusterID: 9234f042-7c20-11ea-b005-002590f3680a
+        fsName: manila
+        storage.kubernetes.io/csiProvisionerIdentity: 1590603493995-8081-cephfs.csi.ceph.com
+      volumeHandle: 0001-0024-9234f042-7c20-11ea-b005-002590f3680a-0000000000000001-22b289ae-a10f-11ea-a4fd-2e98c159ca14
+    mountOptions:
+    - debug
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: cephfs-retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: cephfs.csi.ceph.com
     creationTimestamp: "2020-05-21T11:09:28Z"
     finalizers:
     - kubernetes.io/pv-protection
@@ -488,6 +686,105 @@ items:
         fsName: manila
         storage.kubernetes.io/csiProvisionerIdentity: 1590061608910-8081-cephfs.csi.ceph.com
       volumeHandle: 0001-0024-9234f042-7c20-11ea-b005-002590f3680a-0000000000000001-2e6f186d-9d03-11ea-9d2f-52cc6c2b3102
+    mountOptions:
+    - debug
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: cephfs-retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: cephfs.csi.ceph.com
+    creationTimestamp: "2020-06-06T12:49:16Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:namespace: {}
+            f:resourceVersion: {}
+            f:uid: {}
+          f:csi:
+            .: {}
+            f:controllerExpandSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:driver: {}
+            f:fsType: {}
+            f:nodeStageSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:volumeAttributes:
+              .: {}
+              f:clusterID: {}
+              f:fsName: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:mountOptions: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: csi-provisioner
+      operation: Update
+      time: "2020-06-06T12:49:16Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2020-06-06T12:49:16Z"
+    name: pvc-7db07df7-7c9a-4425-99f2-6a1af60cbf20
+    resourceVersion: "3330635"
+    selfLink: /api/v1/persistentvolumes/pvc-7db07df7-7c9a-4425-99f2-6a1af60cbf20
+    uid: 3abdfff0-9676-4f7d-b1aa-490724c5181f
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 100Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: nextcloud
+      namespace: nextcloud
+      resourceVersion: "3330609"
+      uid: 7db07df7-7c9a-4425-99f2-6a1af60cbf20
+    csi:
+      controllerExpandSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      driver: cephfs.csi.ceph.com
+      fsType: ext4
+      nodeStageSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      volumeAttributes:
+        clusterID: 9234f042-7c20-11ea-b005-002590f3680a
+        fsName: manila
+        storage.kubernetes.io/csiProvisionerIdentity: 1591122002902-8081-cephfs.csi.ceph.com
+      volumeHandle: 0001-0024-9234f042-7c20-11ea-b005-002590f3680a-0000000000000001-2033536a-a7f4-11ea-9f50-36d786bd818c
     mountOptions:
     - debug
     persistentVolumeReclaimPolicy: Retain
@@ -896,6 +1193,105 @@ items:
   metadata:
     annotations:
       pv.kubernetes.io/provisioned-by: cephfs.csi.ceph.com
+    creationTimestamp: "2020-05-28T18:14:58Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:namespace: {}
+            f:resourceVersion: {}
+            f:uid: {}
+          f:csi:
+            .: {}
+            f:controllerExpandSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:driver: {}
+            f:fsType: {}
+            f:nodeStageSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:volumeAttributes:
+              .: {}
+              f:clusterID: {}
+              f:fsName: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:mountOptions: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: csi-provisioner
+      operation: Update
+      time: "2020-05-28T18:14:58Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2020-05-28T18:14:58Z"
+    name: pvc-9e7160ab-6fbf-4ae5-8567-c4085310bb60
+    resourceVersion: "1660469"
+    selfLink: /api/v1/persistentvolumes/pvc-9e7160ab-6fbf-4ae5-8567-c4085310bb60
+    uid: da5c1490-a778-4586-b3d8-a02f1e4e2216
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: sonarr-config
+      namespace: default
+      resourceVersion: "1660447"
+      uid: 9e7160ab-6fbf-4ae5-8567-c4085310bb60
+    csi:
+      controllerExpandSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      driver: cephfs.csi.ceph.com
+      fsType: ext4
+      nodeStageSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      volumeAttributes:
+        clusterID: 9234f042-7c20-11ea-b005-002590f3680a
+        fsName: manila
+        storage.kubernetes.io/csiProvisionerIdentity: 1590603493995-8081-cephfs.csi.ceph.com
+      volumeHandle: 0001-0024-9234f042-7c20-11ea-b005-002590f3680a-0000000000000001-22b920ec-a10f-11ea-a4fd-2e98c159ca14
+    mountOptions:
+    - debug
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: cephfs-retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: cephfs.csi.ceph.com
     creationTimestamp: "2020-05-23T18:44:18Z"
     finalizers:
     - kubernetes.io/pv-protection
@@ -1082,6 +1478,204 @@ items:
         fsName: manila
         storage.kubernetes.io/csiProvisionerIdentity: 1590061608910-8081-cephfs.csi.ceph.com
       volumeHandle: 0001-0024-9234f042-7c20-11ea-b005-002590f3680a-0000000000000001-c36eaefa-9d16-11ea-9d2f-52cc6c2b3102
+    mountOptions:
+    - debug
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: cephfs-retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: cephfs.csi.ceph.com
+    creationTimestamp: "2020-05-28T18:14:58Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:namespace: {}
+            f:resourceVersion: {}
+            f:uid: {}
+          f:csi:
+            .: {}
+            f:controllerExpandSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:driver: {}
+            f:fsType: {}
+            f:nodeStageSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:volumeAttributes:
+              .: {}
+              f:clusterID: {}
+              f:fsName: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:mountOptions: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: csi-provisioner
+      operation: Update
+      time: "2020-05-28T18:14:58Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2020-05-28T18:14:58Z"
+    name: pvc-e4886fad-f92c-4492-b9aa-e3274e7369f5
+    resourceVersion: "1660480"
+    selfLink: /api/v1/persistentvolumes/pvc-e4886fad-f92c-4492-b9aa-e3274e7369f5
+    uid: e02ad531-f0dd-497e-9cfa-08968f875e40
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: radarr-config
+      namespace: default
+      resourceVersion: "1660442"
+      uid: e4886fad-f92c-4492-b9aa-e3274e7369f5
+    csi:
+      controllerExpandSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      driver: cephfs.csi.ceph.com
+      fsType: ext4
+      nodeStageSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      volumeAttributes:
+        clusterID: 9234f042-7c20-11ea-b005-002590f3680a
+        fsName: manila
+        storage.kubernetes.io/csiProvisionerIdentity: 1590603493995-8081-cephfs.csi.ceph.com
+      volumeHandle: 0001-0024-9234f042-7c20-11ea-b005-002590f3680a-0000000000000001-22b024aa-a10f-11ea-a4fd-2e98c159ca14
+    mountOptions:
+    - debug
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: cephfs-retain
+    volumeMode: Filesystem
+  status:
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      pv.kubernetes.io/provisioned-by: cephfs.csi.ceph.com
+    creationTimestamp: "2020-06-06T12:49:16Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:pv.kubernetes.io/provisioned-by: {}
+        f:spec:
+          f:accessModes: {}
+          f:capacity:
+            .: {}
+            f:storage: {}
+          f:claimRef:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:namespace: {}
+            f:resourceVersion: {}
+            f:uid: {}
+          f:csi:
+            .: {}
+            f:controllerExpandSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:driver: {}
+            f:fsType: {}
+            f:nodeStageSecretRef:
+              .: {}
+              f:name: {}
+              f:namespace: {}
+            f:volumeAttributes:
+              .: {}
+              f:clusterID: {}
+              f:fsName: {}
+              f:storage.kubernetes.io/csiProvisionerIdentity: {}
+            f:volumeHandle: {}
+          f:mountOptions: {}
+          f:persistentVolumeReclaimPolicy: {}
+          f:storageClassName: {}
+          f:volumeMode: {}
+      manager: csi-provisioner
+      operation: Update
+      time: "2020-06-06T12:49:16Z"
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:status:
+          f:phase: {}
+      manager: kube-controller-manager
+      operation: Update
+      time: "2020-06-06T12:49:16Z"
+    name: pvc-ef1d5b1f-ffd2-4322-a413-dccc8322c46f
+    resourceVersion: "3330629"
+    selfLink: /api/v1/persistentvolumes/pvc-ef1d5b1f-ffd2-4322-a413-dccc8322c46f
+    uid: fb9e4f5c-7a0a-4be7-8a11-7a01dea9b814
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 5Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: db-data
+      namespace: nextcloud
+      resourceVersion: "3330606"
+      uid: ef1d5b1f-ffd2-4322-a413-dccc8322c46f
+    csi:
+      controllerExpandSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      driver: cephfs.csi.ceph.com
+      fsType: ext4
+      nodeStageSecretRef:
+        name: csi-cephfs-secret
+        namespace: ceph-csi-cephfs
+      volumeAttributes:
+        clusterID: 9234f042-7c20-11ea-b005-002590f3680a
+        fsName: manila
+        storage.kubernetes.io/csiProvisionerIdentity: 1591122002902-8081-cephfs.csi.ceph.com
+      volumeHandle: 0001-0024-9234f042-7c20-11ea-b005-002590f3680a-0000000000000001-203415f6-a7f4-11ea-9f50-36d786bd818c
     mountOptions:
     - debug
     persistentVolumeReclaimPolicy: Retain
