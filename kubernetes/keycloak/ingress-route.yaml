@@ -5,10 +5,12 @@ metadata:
   name: keycloak
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
   - match: Host(`keycloak.kurz.site`)
     kind: Rule
     services:
     - name: keycloak
       port: 8080
+  tls:
+    certResolver: letsencrypt

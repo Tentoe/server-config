@@ -5,10 +5,12 @@ metadata:
   name: syncthing
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
   - match: Host(`syncthing.kurz.site`)
     kind: Rule
     services:
     - name: syncthing
       port: 8384
+  tls:
+    certResolver: letsencrypt

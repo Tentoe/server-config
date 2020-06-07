@@ -5,10 +5,15 @@ metadata:
   name: radarr
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
-  - match: Host(`radarr.kurz.site`) || (Host(`radarr2.kurz.site`)
+  - match: Host(`radarr.kurz.site`)
     kind: Rule
     services:
     - name: radarr
       port: 80
+    middlewares:
+      - name: traefik-forward-auth
+        namespace: traefik
+  tls:
+    certResolver: letsencrypt

@@ -5,10 +5,15 @@ metadata:
   name: sonarr
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
-  - match: Host(`sonarr.kurz.site`) || (Host(`sonarr2.kurz.site`)
+  - match: Host(`sonarr.kurz.site`)
     kind: Rule
     services:
     - name: sonarr
       port: 80
+    middlewares:
+      - name: traefik-forward-auth
+        namespace: traefik
+  tls:
+    certResolver: letsencrypt

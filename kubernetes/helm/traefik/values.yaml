@@ -51,11 +51,11 @@ globalArguments:
 # All available options available on https://docs.traefik.io/reference/static-configuration/cli/
 ## Use curly braces to pass values: `helm install --set="additionalArguments={--providers.kubernetesingress,--logs.level=DEBUG}"`
 additionalArguments:
-- --certificatesresolvers.myresolver.acme.tlschallenge
-- --certificatesresolvers.myresolver.acme.email=tentoe86@gmail.com
-- --certificatesresolvers.myresolver.acme.storage=/data/acme.json
-- --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+- --certificatesresolvers.letsencrypt.acme.tlschallenge
+- --certificatesresolvers.letsencrypt.acme.email=tentoe86@gmail.com
+- --certificatesresolvers.letsencrypt.acme.storage=/data/acme.json
 - --serverstransport.insecureskipverify=true
+#- --certificatesresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
 #  - "--providers.kubernetesingress"
 #  - "--logs.level=DEBUG"
 
