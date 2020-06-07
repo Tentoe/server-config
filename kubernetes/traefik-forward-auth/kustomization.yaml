@@ -1,0 +1,27 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: traefik
+
+commonLabels:
+  app: traefik-forward-auth
+
+resources:
+- deployment.yaml
+- service.yaml
+- ingress.yaml
+- middleware.yaml
+
+
+configMapGenerator:
+- name: traefik-forward-auth-configs
+  files:
+    - traefik-forward-auth.ini
+  literals:
+    - client-id=traefik
+
+secretGenerator:
+- name: traefik-forward-auth-secrets
+  files:
+    - client-secret
+    - secret-secret

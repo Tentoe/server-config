@@ -1,0 +1,37 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-forward-auth
+  labels:
+    app: traefik
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`auth.kurz.site`)
+    kind: Rule
+    services:
+    - name: traefik-forward-auth
+      port: 4181
+    middlewares:
+      - name: traefik-forward-auth
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefik-forward-auth-https
+  labels:
+    app: traefik
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`auth.kurz.site`)
+    kind: Rule
+    services:
+    - name: traefik-forward-auth
+      port: 4181
+    middlewares:
+      - name: traefik-forward-auth
+  tls:
+    certResolver: letsencrypt
